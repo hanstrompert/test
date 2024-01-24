@@ -47,12 +47,11 @@ jobs:
           result-encoding: string
           #result-encoding: json
           script: |
-            const ret = github.rest.repos.getCommit({
+            const commit = await github.rest.repos.getCommit({
               owner: 'hanstrompert',
               repo: 'test-client',
               ref: 'heads/main',
             })
-            const commit = await github.paginate(ret)
             return commit.sha
           #script: |
           #  return github.rest.repos.get({
