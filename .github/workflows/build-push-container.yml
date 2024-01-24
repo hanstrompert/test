@@ -50,5 +50,5 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: 'test-client',
-              ref: `${REF}`,
+              ref: process.env.REF,
             })
