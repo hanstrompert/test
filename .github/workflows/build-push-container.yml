@@ -50,10 +50,12 @@ jobs:
               repo: 'test-client',
               ref: 'main',
             })
+      - name: Get result
+        run: echo "${{steps.sha.outputs.result}}"
       - name: Tag test-client
         uses: actions/github-script@v5
         env:
-          REF: ${{ format('refs/tags/{0}', steps.sha.outputs.sha) }}
+          REF: ${{ format('refs/tags/{0}', steps.sha.outputs.result.sha) }}
           # REF: refs/tags/0.6.6
         with:
           github-token: ${{ secrets.CREATE_TAG_PAT }}
