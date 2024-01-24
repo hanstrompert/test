@@ -41,7 +41,8 @@ jobs:
       - name: Tag test-client
         uses: actions/github-script@v5
         env:
-          REF: refs/tags/{{ org.opencontainers.image.version }}
+          # REF: refs/tags/{{ org.opencontainers.image.version }}
+          REF: refs/tags/0.6.6
         with:
           script: |
             github.rest.git.createRef({
