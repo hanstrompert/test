@@ -40,6 +40,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Get latest commit sha for main of test-client
+        id: sha
         uses: actions/github-script@v5
         with:
           # github-token: ${{ secrets.CREATE_TAG_PAT }}
@@ -52,7 +53,7 @@ jobs:
       - name: Tag test-client
         uses: actions/github-script@v5
         env:
-          REF: ${{ format('refs/tags/{0}', steps.meta.outputs.labels.org.opencontainers.image.version) }}
+          REF: ${{ format('refs/tags/{0}', steps.sha.outputs.sha) }}
           # REF: refs/tags/0.6.6
         with:
           github-token: ${{ secrets.CREATE_TAG_PAT }}
