@@ -52,7 +52,7 @@ jobs:
               repo: 'test-client',
               ref: 'heads/main',
             })
-            return commit.sha
+            return commit.data.sha
           #script: |
           #  return github.rest.repos.get({
           #    owner: 'hanstrompert',
