@@ -43,7 +43,7 @@ jobs:
         id: sha
         uses: actions/github-script@v5
         with:
-          # github-token: ${{ secrets.CREATE_TAG_PAT }}
+          github-token: ${{ secrets.CREATE_TAG_PAT }}
           script: |
             github.rest.repos.getBranch({
               owner: context.repo.owner,
