@@ -52,7 +52,7 @@ jobs:
           #    ref: 'heads/main',
           #  })
           script: |
-            github.rest.repos.get({
+            return github.rest.repos.get({
               owner: 'hanstrompert',
               repo: 'test-client',
             })
