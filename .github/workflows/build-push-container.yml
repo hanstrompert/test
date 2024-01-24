@@ -62,7 +62,7 @@ jobs:
         run: echo "${{ steps.sha.outputs.result }}"
       - name: Tag test-client
         uses: actions/github-script@v5
-        env:'45353f37b0517b51e25596e1d588e4e6f9cbc21d'
+        env:
           #REF: ${{ format('refs/tags/{0}', steps.sha.outputs.result) }}
           REF: refs/tags/0.6.48
         with:
