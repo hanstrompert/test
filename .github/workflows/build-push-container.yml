@@ -44,7 +44,7 @@ jobs:
         env:
           # REF: refs/tags/{{ org.opencontainers.image.version }}
           REF: refs/tags/0.6.6
-          github-token: ${{ secrets.CREATE_TAG_TOKEN }}
+          github-token: ${{ secrets.CREATE_TAG_PAT }}
         with:
           script: |
             github.rest.git.createRef({
