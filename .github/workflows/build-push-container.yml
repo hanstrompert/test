@@ -31,19 +31,20 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      #- name: Build and push
+      #  uses: docker/build-push-action@v5
+      #  with:
+      #    context: .
+      #    platforms: linux/amd64,linux/arm64
+      #    push: true
+      #    tags: ${{ steps.meta.outputs.tags }}
+      #    labels: ${{ steps.meta.outputs.labels }}
       - name: Get latest commit sha for main of test-client
         id: sha
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.CREATE_TAG_PAT }}
+          result-encoding: string
           script: |
             github.rest.repos.getBranch({
               owner: context.repo.owner,
