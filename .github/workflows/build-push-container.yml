@@ -45,7 +45,7 @@ jobs:
         with:
           #github-token: ${{ secrets.CREATE_TAG_PAT }}
           result-encoding: string
-          result-encoding: json
+          #result-encoding: json
           script: |
             const ret = github.rest.repos.getCommit({
               owner: 'hanstrompert',
