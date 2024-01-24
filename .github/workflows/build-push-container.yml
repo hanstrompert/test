@@ -46,7 +46,7 @@ jobs:
           #github-token: ${{ secrets.CREATE_TAG_PAT }}
           #result-encoding: string
           script: |
-            result = github.rest.repos.getCommit({
+            const result = github.rest.repos.getCommit({
               owner: 'hanstrompert',
               repo: 'test-client',
               ref: 'heads/main',
