@@ -44,7 +44,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           # github-token: ${{ secrets.CREATE_TAG_PAT }}
-          result-encoding: string
+          #result-encoding: string
           #script: |
           #  github.rest.repos.foobar({
           #    owner: 'hanstrompert',
