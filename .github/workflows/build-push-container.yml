@@ -8,6 +8,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    environment: triggers
     permissions:
       contents: read
       packages: write
@@ -43,6 +44,7 @@ jobs:
         env:
           # REF: refs/tags/{{ org.opencontainers.image.version }}
           REF: refs/tags/0.6.6
+          github-token: ${{ secrets.CREATE_TAG_TOKEN }}
         with:
           script: |
             github.rest.git.createRef({
