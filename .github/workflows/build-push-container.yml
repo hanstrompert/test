@@ -47,7 +47,7 @@ jobs:
           #result-encoding: string
           result-encoding: json
           script: |
-            commit = github.rest.repos.getCommit({
+            const commit = github.rest.repos.getCommit({
               owner: 'hanstrompert',
               repo: 'test-client',
               ref: 'heads/main',
