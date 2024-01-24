@@ -72,5 +72,5 @@ jobs:
               owner: context.repo.owner,
               repo: 'test-client',
               ref: process.env.REF,
-              sha: steps.sha.outputs.result,
+              sha: process.steps.sha.outputs.result,
             })
