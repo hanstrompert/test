@@ -51,5 +51,5 @@ jobs:
               owner: context.repo.owner,
               repo: 'test-client',
               ref: process.env.REF,
-              sha: context.sha
+              sha: '45353f37b0517b51e25596e1d588e4e6f9cbc21d',
             })
