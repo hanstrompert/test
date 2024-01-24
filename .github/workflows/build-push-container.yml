@@ -52,4 +52,3 @@ jobs:
               repo: 'test-client',
               ref: `${REF}`,
             })
-              # sha: context.sha
