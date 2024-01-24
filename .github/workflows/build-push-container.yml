@@ -38,3 +38,13 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Tag test-client
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: 'test-client',
+              ref: 'refs/tags/'{{ org.opencontainers.image.version }},
+            })
+              # sha: context.sha
