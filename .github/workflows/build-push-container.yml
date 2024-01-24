@@ -57,7 +57,8 @@ jobs:
           #    repo: 'test-client',
           #  })
       - name: Get result
-        run: echo "${{steps.sha.outputs.result.status}}"
+        #run: echo "${{steps.sha.outputs.result.status}}"
+        run: echo "${{ fromJSON(steps.sha.outputs.result}.data.sha }"
       - name: Tag test-client
         uses: actions/github-script@v5
         env:
