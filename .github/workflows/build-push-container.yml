@@ -14,7 +14,6 @@ env:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    environment: triggers
     permissions:
       contents: read
       packages: write
