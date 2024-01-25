@@ -6,6 +6,11 @@ on:
       #- "[0-9]+.[0-9]+.[0-9]+.?*"
       - "@orchestrator-ui/orchestrator-ui-components@[0-9]+.[0-9]+.[0-9]+"
 
+# The main branch of the following repository will be tagged.
+env:
+  REPOSITORY_OWNER: "hanstrompert"
+  REPOSITORY_NAME: "test-client"
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -47,8 +52,8 @@ jobs:
           result-encoding: string
           script: |
             const commit = await github.rest.repos.getCommit({
-              owner: 'hanstrompert',
-              repo: 'test-client',
+              owner: context.env.REPOSITORY_OWNER,
+              repo: context.env.REPOSITORY_NAME,
               ref: 'heads/main',
             })
             return commit.data.sha
