@@ -63,8 +63,9 @@ jobs:
       - name: Tag test-client
         uses: actions/github-script@v5
         env:
-          #REF: ${{ format('refs/tags/{0}', steps.sha.outputs.result) }}
-          REF: refs/tags/0.6.48
+          REF: ${{ format('refs/tags/{0}', github.ref_name) }}
+          #REF: refs/tags/0.6.48
+          SHA: ${{ steps.sha.outputs.result }}
         with:
           github-token: ${{ secrets.CREATE_TAG_PAT }}
           script: |
@@ -72,5 +73,5 @@ jobs:
               owner: context.repo.owner,
               repo: 'test-client',
               ref: process.env.REF,
-              sha: process.steps.sha.outputs.result,
+              sha: process.env.SHA,
             })
