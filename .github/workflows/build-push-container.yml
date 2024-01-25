@@ -65,7 +65,7 @@ jobs:
           REF: ${{ format('refs/tags/{0}', env.REF) }}
           SHA: ${{ steps.sha.outputs.result }}
         with:
-          github-token: ${{ secrets.CREATE_TAG_PAT }}
+          github-token: ${{ secrets.TOKEN_CREATE_TAG_TEST_CLIENT }}
           script: |
             github.rest.git.createRef({
               owner: context.repo.owner,
