@@ -48,12 +48,15 @@ jobs:
       - name: Get latest commit SHA for main of test-client
         id: sha
         uses: actions/github-script@v7
+        env:
+          OWNER: ${{ env.REPOSITORY_OWNER }}
+          REPO: ${{ env.REPOSITORY_NAME }}
         with:
           result-encoding: string
           script: |
             const commit = await github.rest.repos.getCommit({
-              owner: context.env.REPOSITORY_OWNER,
-              repo: context.env.REPOSITORY_NAME,
+              owner: process.env.OWNER,
+              repo: process.env.REPO,
               ref: 'heads/main',
             })
             return commit.data.sha
