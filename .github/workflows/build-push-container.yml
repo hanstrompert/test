@@ -45,7 +45,7 @@ jobs:
       #    push: true
       #    tags: ${{ steps.meta.outputs.tags }}
       #    labels: ${{ steps.meta.outputs.labels }}
-      - name: Get latest commit SHA for main of {{ env.REPOSITORY_OWNER }}/{{ env.REPOSITORY_NAME }}
+      - name: Get latest commit SHA for main of ${REPOSITORY_OWNER }/${REPOSITORY_NAME }
         id: sha
         uses: actions/github-script@v7
         env:
@@ -67,7 +67,7 @@ jobs:
           echo REF=${REF} >> $GITHUB_ENV
       - name: Show SHA and REF
         run: echo "will tag ${{ steps.sha.outputs.result }} with ${{ env.REF }}"
-      - name: Tag ${{ steps.sha.outputs.result }} of {{ env.REPOSITORY_NAME }} with ${{ env.REF }}
+      - name: Tag ${{ steps.sha.outputs.result }} of ${REPOSITORY_NAME} with ${{ env.REF }}
         uses: actions/github-script@v7
         env:
           OWNER: ${{ env.REPOSITORY_OWNER }}
