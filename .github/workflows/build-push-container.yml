@@ -55,7 +55,7 @@ jobs:
       - name: Extract REF from ref_name
         run: |
           REF_NAME=${{ github.ref_name }}
-          REF=${REF_NAAME/@orchestrator-ui\/orchestrator-ui-components@/}
+          REF=${REF_NAME/@orchestrator-ui\/orchestrator-ui-components@/}
           echo REF=${REF} >> $GITHUB_ENV
       - name: print env
         run: echo ${{ env.REF }}
