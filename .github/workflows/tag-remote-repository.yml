@@ -40,16 +40,16 @@ jobs:
       - name: Add tag to repository
         uses: actions/github-script@v7
         env:
-          OWNER: ${{ env.REPOSITORY_OWNER }}
-          REPO: ${{ env.REPOSITORY_NAME }}
+#          OWNER: ${{ env.REPOSITORY_OWNER }}
+#          REPO: ${{ env.REPOSITORY_NAME }}
           REF: ${{ format('refs/tags/{0}', env.REF) }}
           SHA: ${{ steps.sha.outputs.result }}
         with:
           github-token: ${{ secrets.TOKEN_CREATE_TAG_TEST_CLIENT }}
           script: |
             await github.rest.git.createRef({
-              owner: process.env.OWNER,
-              repo: process.env.REPO,
+              owner: process.env.REPOSITORY_OWNER,
+              repo: process.env.REPOSITORY_NAME,
               ref: process.env.REF,
               sha: process.env.SHA,
             })
