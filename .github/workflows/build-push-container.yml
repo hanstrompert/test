@@ -3,7 +3,8 @@ name: Build and push container image
 on:
   push:
     tags:
-      - "[0-9]+.[0-9]+.[0-9]+.?*"
+      #- "[0-9]+.[0-9]+.[0-9]+.?*"
+      - "@orchestrator-ui/orchestrator-ui-components@[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   docker:
