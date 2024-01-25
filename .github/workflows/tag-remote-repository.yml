@@ -1,3 +1,6 @@
+#
+# Use the GitHub API to tag the main branch of another repository.
+#
 name: Tag remote repository
 
 on:
@@ -5,10 +8,11 @@ on:
     tags:
       - "@orchestrator-ui/orchestrator-ui-components@[0-9]+.[0-9]+.[0-9]+"
 
-# The main branch of the following repository will be tagged.
+# The main branch of the following repository (owner/repo) will be tagged
+# with the version part (e.g. 0.3.1) of the tag trigger above.
 env:
-  REPOSITORY_OWNER: "hanstrompert"
-  REPOSITORY_NAME: "test-client"
+  OWNER: "hanstrompert"
+  REPO: "test-client"
 
 jobs:
   docker:
@@ -20,9 +24,6 @@ jobs:
       - name: Get latest commit SHA
         id: sha
         uses: actions/github-script@v7
-        env:
-          OWNER: ${{ env.REPOSITORY_OWNER }}
-          REPO: ${{ env.REPOSITORY_NAME }}
         with:
           result-encoding: string
           script: |
@@ -40,16 +41,14 @@ jobs:
       - name: Add tag to repository
         uses: actions/github-script@v7
         env:
-#          OWNER: ${{ env.REPOSITORY_OWNER }}
-#          REPO: ${{ env.REPOSITORY_NAME }}
           REF: ${{ format('refs/tags/{0}', env.REF) }}
           SHA: ${{ steps.sha.outputs.result }}
         with:
           github-token: ${{ secrets.TOKEN_CREATE_TAG_TEST_CLIENT }}
           script: |
             await github.rest.git.createRef({
-              owner: process.env.REPOSITORY_OWNER,
-              repo: process.env.REPOSITORY_NAME,
+              owner: process.env.OWNER,
+              repo: process.env.REPO,
               ref: process.env.REF,
               sha: process.env.SHA,
             })
