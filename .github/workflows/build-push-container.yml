@@ -45,7 +45,7 @@ jobs:
       #    push: true
       #    tags: ${{ steps.meta.outputs.tags }}
       #    labels: ${{ steps.meta.outputs.labels }}
-      - name: Get latest commit SHA for main of test-client
+      - name: Get latest commit SHA for main of {{ env.REPOSITORY_OWNER }}/{{ env.REPOSITORY_NAME }}
         id: sha
         uses: actions/github-script@v7
         env:
@@ -67,17 +67,19 @@ jobs:
           echo REF=${REF} >> $GITHUB_ENV
       - name: Show SHA and REF
         run: echo "will tag ${{ steps.sha.outputs.result }} with ${{ env.REF }}"
-      - name: Tag test-client
+      - name: Tag ${{ steps.sha.outputs.result }} of {{ env.REPOSITORY_NAME }} with ${{ env.REF }}
         uses: actions/github-script@v7
         env:
+          OWNER: ${{ env.REPOSITORY_OWNER }}
+          REPO: ${{ env.REPOSITORY_NAME }}
           REF: ${{ format('refs/tags/{0}', env.REF) }}
           SHA: ${{ steps.sha.outputs.result }}
         with:
           github-token: ${{ secrets.TOKEN_CREATE_TAG_TEST_CLIENT }}
           script: |
             github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: 'test-client',
+              owner: process.env.OWNER,
+              repo: process.env.REPO,
               ref: process.env.REF,
               sha: process.env.SHA,
             })
