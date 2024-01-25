@@ -45,7 +45,7 @@ jobs:
       #    push: true
       #    tags: ${{ steps.meta.outputs.tags }}
       #    labels: ${{ steps.meta.outputs.labels }}
-      - name: Get latest commit SHA for main of ${REPOSITORY_OWNER }/${REPOSITORY_NAME }
+      - name: Get latest commit SHA
         id: sha
         uses: actions/github-script@v7
         env:
@@ -65,9 +65,7 @@ jobs:
           REF_NAME=${{ github.ref_name }}
           REF=${REF_NAME/@orchestrator-ui\/orchestrator-ui-components@/}
           echo REF=${REF} >> $GITHUB_ENV
-      - name: Show SHA and REF
-        run: echo "will tag ${{ steps.sha.outputs.result }} with ${{ env.REF }}"
-      - name: Tag ${{ steps.sha.outputs.result }} of ${REPOSITORY_NAME} with ${{ env.REF }}
+      - name: Add tag to repository
         uses: actions/github-script@v7
         env:
           OWNER: ${{ env.REPOSITORY_OWNER }}
@@ -77,7 +75,7 @@ jobs:
         with:
           github-token: ${{ secrets.TOKEN_CREATE_TAG_TEST_CLIENT }}
           script: |
-            github.rest.git.createRef({
+            await github.rest.git.createRef({
               owner: process.env.OWNER,
               repo: process.env.REPO,
               ref: process.env.REF,
