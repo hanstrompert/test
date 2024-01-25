@@ -52,12 +52,19 @@ jobs:
               ref: 'heads/main',
             })
             return commit.data.sha
+      - name: Extract REF from ref_name
+        run: |
+          REF_NAME=${{ github.ref_name }}
+          REF=${REF_NAAME/@orchestrator-ui\/orchestrator-ui-components@/}
+          echo REF=${REF} >> $GITHUB_ENV
+      - name: print env
+        run: echo ${{ env.REF }}
       - name: Show SHA and REF
-        run: echo "will tag ${{ steps.sha.outputs.result }} with ${{ github.ref_name }}"
+        run: echo "will tag ${{ steps.sha.outputs.result }} with ${{ env.REF }}"
       - name: Tag test-client
         uses: actions/github-script@v5
         env:
-          REF: ${{ format('refs/tags/{0}', github.ref_name) }}
+          REF: ${{ format('refs/tags/{0}', env.REF }}
           SHA: ${{ steps.sha.outputs.result }}
         with:
           github-token: ${{ secrets.CREATE_TAG_PAT }}
