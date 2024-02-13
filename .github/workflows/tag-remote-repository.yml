@@ -28,7 +28,7 @@ jobs:
           app-id: ${{ vars.TEST_APP_ID }}
           private-key: ${{ secrets.TEST_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: "test-client"
+          # repositories: "test-client"
       - name: Get latest commit SHA
         id: sha
         uses: actions/github-script@v7
