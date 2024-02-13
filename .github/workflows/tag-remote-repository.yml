@@ -21,8 +21,9 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/create-github-app-token@v1
+      - name: Create GitHub app token
         id: app-token
+        uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.TEST_APP_ID }}
           private-key: ${{ secrets.TEST_PRIVATE_KEY }}
